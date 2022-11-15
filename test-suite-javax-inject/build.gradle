@@ -1,5 +1,15 @@
 plugins {
     id "io.micronaut.build.internal.convention-test-library"
+    id 'org.checkerframework' version '0.6.11'
+}
+
+apply plugin: 'org.checkerframework'
+
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.tainting.TaintingChecker',
+            //'org.checkerframework.checker.tainting.TaintingChecker'
+    ]
 }
 
 dependencies {
@@ -9,4 +19,7 @@ dependencies {
     testImplementation project(":inject")
     testImplementation libs.javax.inject
     testImplementation libs.managed.javax.annotation.api
+    compileOnly 'org.checkerframework:checker-qual:3.26.0'
+    testCompileOnly 'org.checkerframework:checker-qual:3.26.0'
+    checkerFramework 'org.checkerframework:checker:3.26.0'
 }

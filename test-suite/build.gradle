@@ -13,6 +13,16 @@ plugins {
     id "io.micronaut.build.internal.convention-test-library"
     id 'io.micronaut.build.internal.functional-test'
     id 'java-test-fixtures'
+    id 'org.checkerframework' version '0.6.11'
+}
+
+apply plugin: 'org.checkerframework'
+
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.tainting.TaintingChecker',
+            //'org.checkerframework.checker.tainting.TaintingChecker'
+    ]
 }
 
 micronautBuild {
@@ -91,6 +101,10 @@ dependencies {
     testFixturesApi libs.managed.spock
     testFixturesApi libs.managed.groovy
     testFixturesApi libs.jetbrains.annotations
+
+    compileOnly 'org.checkerframework:checker-qual:3.26.0'
+    testCompileOnly 'org.checkerframework:checker-qual:3.26.0'
+    checkerFramework 'org.checkerframework:checker:3.26.0'
 }
 
 //tasks.withType(Test).configureEach {

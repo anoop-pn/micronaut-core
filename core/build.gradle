@@ -3,6 +3,16 @@ import io.micronaut.build.internal.japicmp.RemovedPackages
 
 plugins {
     id "io.micronaut.build.internal.convention-core-library"
+    id 'org.checkerframework' version '0.6.11'
+}
+
+apply plugin: 'org.checkerframework'
+
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.tainting.TaintingChecker',
+            //'org.checkerframework.checker.tainting.TaintingChecker'
+    ]
 }
 
 micronautBuild {
@@ -15,6 +25,9 @@ dependencies {
     compileOnly libs.managed.jsr305
     compileOnly libs.managed.graal
     compileOnly libs.kotlin.stdlib
+    compileOnly 'org.checkerframework:checker-qual:3.26.0'
+    testCompileOnly 'org.checkerframework:checker-qual:3.26.0'
+    checkerFramework 'org.checkerframework:checker:3.26.0'
 }
 
 spotless {

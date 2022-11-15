@@ -1,5 +1,15 @@
 plugins {
     id "io.micronaut.build.internal.convention-library"
+    id 'org.checkerframework' version '0.6.11'
+}
+
+apply plugin: 'org.checkerframework'
+
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.tainting.TaintingChecker',
+            //'org.checkerframework.checker.tainting.TaintingChecker'
+    ]
 }
 
 dependencies {
@@ -32,5 +42,9 @@ dependencies {
 
     compileOnly libs.managed.logback
     compileOnly libs.log4j
+
+    compileOnly 'org.checkerframework:checker-qual:3.26.0'
+    testCompileOnly 'org.checkerframework:checker-qual:3.26.0'
+    checkerFramework 'org.checkerframework:checker:3.26.0'
 
 }

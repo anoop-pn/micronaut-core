@@ -1,6 +1,16 @@
 plugins {
     id "io.micronaut.build.internal.convention-core-library"
     id "org.jetbrains.kotlin.jvm"
+    id 'org.checkerframework' version '0.6.11'
+}
+
+apply plugin: 'org.checkerframework'
+
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.tainting.TaintingChecker',
+            //'org.checkerframework.checker.tainting.TaintingChecker'
+    ]
 }
 
 micronautBuild {
@@ -14,6 +24,9 @@ dependencies {
     api project(':core')
     compileOnly project(':core-reactive')
     compileOnly libs.kotlinx.coroutines.core
+    compileOnly 'org.checkerframework:checker-qual:3.26.0'
+    testCompileOnly 'org.checkerframework:checker-qual:3.26.0'
+    checkerFramework 'org.checkerframework:checker:3.26.0'
 }
 
 tasks.named("compileKotlin") {
